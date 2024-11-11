@@ -24,4 +24,7 @@ public class CategoryEntity {
 
     private Integer active;
 
+    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
+    private ProductEntity product;
+
 }

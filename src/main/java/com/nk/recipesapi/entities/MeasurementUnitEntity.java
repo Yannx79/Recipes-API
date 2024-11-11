@@ -24,4 +24,10 @@ public class MeasurementUnitEntity {
 
     private Integer active;
 
+    @OneToOne(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
+    private ProductEntity product;
+
+    @OneToOne(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
+    private IngredientEntity ingredient;
+
 }
