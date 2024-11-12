@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .                # Usamos el contexto actual para la construcción
+      dockerfile: Dockerfile     # Dockerfile de la aplicación
+    ports:
+      - "8080:8080"             # Mapea el puerto 8080 del host al contenedor
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/db_recipes_api
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0            # Imagen de MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: db_recipes_api
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mysecretpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-data:

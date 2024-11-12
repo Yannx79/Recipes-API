@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/measurement-unit")
+@RequestMapping("/measurement-units")
 @RequiredArgsConstructor
 public class MeasurementUnitController {
 

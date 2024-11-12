@@ -23,7 +23,7 @@ public class IngredientEntity {
     @JoinColumn(name = "recipe_id")
     private RecipeEntity recipe;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "measurement_unit_id")
     private MeasurementUnitEntity measurementUnit;
 

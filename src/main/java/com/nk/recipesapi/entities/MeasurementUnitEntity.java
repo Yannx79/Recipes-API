@@ -3,6 +3,8 @@ package com.nk.recipesapi.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,10 +26,10 @@ public class MeasurementUnitEntity {
 
     private Integer active;
 
-    @OneToOne(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
-    private ProductEntity product;
+    @OneToMany(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
+    private List<ProductEntity> product;
 
-    @OneToOne(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
-    private IngredientEntity ingredient;
+    @OneToMany(mappedBy = "measurementUnit", cascade = CascadeType.ALL)
+    private List<IngredientEntity> ingredient;
 
 }

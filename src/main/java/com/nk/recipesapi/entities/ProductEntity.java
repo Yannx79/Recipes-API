@@ -26,11 +26,11 @@ public class ProductEntity {
 
     private LocalDate enterDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "measurement_unit_id")
     private MeasurementUnitEntity measurementUnit;
 
