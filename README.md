@@ -12,4 +12,5 @@ The Recipes API provides access to manage categories, ingredients, recipes, and 
 
 - **Server:** Spring Boot, Spring Data JPA
 - **Database:** MySQL
+- **Infraestructure:** Docker
 
