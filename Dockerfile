@@ -6,11 +6,11 @@ COPY ./pom.xml /root
 COPY ./.mvn /root/.mvn
 COPY ./mvnw /root
 
+RUN chmod +x mvnw
+
 RUN ./mvnw dependency:go-offline
 
 COPY ./src /root/src
-
-RUN chmod +x mvnw
 
 RUN ./mvnw clean install -DskipTests
 
