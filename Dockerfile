@@ -1,14 +1,24 @@
-# Stage 1: Builder
-FROM maven:3.8.6-eclipse-temurin-17 AS builder
-WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline
-COPY src ./src
-RUN mvn clean package -DskipTests
+FROM eclipse-temurin:21.0.3_9-jdk AS Build
 
-# Stage 2: Production´s Image
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+WORKDIR /root
+
+COPY ./pom.xml /root
+COPY ./.mvn /root/.mvn
+COPY ./mvnw /root
+
+RUN ./mvnw dependency:go-offline
+
+COPY ./src /root/src
+
+RUN ./mvnw clean install -DskipTests
+
+FROM eclipse-temurin:21.0.3_9-jre AS Run
+
+WORKDIR /root
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /root/target/Recipes-API-0.0.1-SNAPSHOT.jar /root/target/Recipes-API-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/root/target/Recipes-API-0.0.1-SNAPSHOT.jar"]
+
+LABEL maintainer="https://www.linkedin.com/in/yannick-yasuhiro-funes-chavez/"
+LABEL version="0.0.1"
+LABEL description="This container runs Spring Boot with a custom configuration."

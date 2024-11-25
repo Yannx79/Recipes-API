@@ -37,14 +37,16 @@ jobs:
     - name: Build Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
+        DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
       run: |
-        docker build -t yan640/recipes-api:$NEW_VERSION .
-        docker build -t yan640/recipes-api:latest .
+        docker build -t yan640/$DOCKER_REPOSITORY:$NEW_VERSION .
+        docker build -t yan640/$DOCKER_REPOSITORY:latest .
         
     - name: Push Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
+        DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
       run: |
-        docker push yan640/recipes-api:$NEW_VERSION
-        docker push yan640/recipes-api:latest
+        docker push yan640/$DOCKER_REPOSITORY:$NEW_VERSION
+        docker push yan640/$DOCKER_REPOSITORY:latest
       
