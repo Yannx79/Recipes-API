@@ -10,6 +10,8 @@ RUN ./mvnw dependency:go-offline
 
 COPY ./src /root/src
 
+RUN chmod +x mvnw
+
 RUN ./mvnw clean install -DskipTests
 
 FROM eclipse-temurin:21.0.3_9-jre AS Run
